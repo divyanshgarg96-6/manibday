@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Bhanji! 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #FF1493;
+            --secondary-color: #FF69B4;
+            --accent-color: #FFD700;
+            --dark-accent: #8B008B;
+            --light-color: #FFF0F5;
+            --dark-color: #1a0033;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 25%, #4d0099 50%, #330066 75%, #1a0033 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-color);
+            z-index: 1;
+            pointer-events: none;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        }
+
+        .particle {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 50%;
+        }
+
+        .balloon {
+            position: fixed;
+            width: 50px;
+            height: 65px;
+            border-radius: 50% 50% 50% 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.9;
+            box-shadow: inset -2px -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+            color: white;
+            animation: fadeInDown 0.8s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        .title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #FFD700, #FF69B4, #FF1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 10px rgba(255, 215, 0, 0.3));
+            animation: titleGlow 2s ease-in-out infinite;
+            letter-spacing: -2px;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { filter: drop-shadow(0 2px 10px rgba(255, 215, 0, 0.3)); }
+            50% { filter: drop-shadow(0 4px 20px rgba(255, 105, 180, 0.6)); }
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            font-weight: 400;
+            background: linear-gradient(135deg, #FFD700, #FF69B4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: clamp(15px, 5vw, 30px);
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.08), rgba(138, 0, 138, 0.08));
+            border-radius: 25px;
+            padding: clamp(25px, 8vw, 50px);
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(138, 0, 138, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .gallery-section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(255, 105, 180, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .gallery-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(20px, 5vw, 40px);
+            margin-bottom: 40px;
+            min-height: 500px;
+        }
+
+        .photo-card {
+            display: flex;
+            flex-direction: column;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(138, 0, 138, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .photo-card:nth-child(1) {
+            animation: slideInLeft 0.7s ease-out;
+        }
+
+        .photo-card:nth-child(2) {
+            animation: slideInRight 0.7s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px) rotateY(-20deg); }
+            to { opacity: 1; transform: translateX(0) rotateY(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px) rotateY(20deg); }
+            to { opacity: 1; transform: translateX(0) rotateY(0); }
+        }
+
+        .photo-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 70px rgba(255, 105, 180, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .photo-display {
+            width: 100%;
+            height: clamp(200px, 40vw, 300px);
+            background: linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #8B008B 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-display::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+            background-size: 20px 20px;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .photo-number {
+            font-size: clamp(0.75rem, 2vw, 1rem);
+            color: #FFD700;
+            font-weight: 700;
+            margin-top: 12px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .quote-display {
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.9) 0%, rgba(138, 0, 138, 0.9) 100%);
+            color: white;
+            padding: clamp(20px, 5vw, 35px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .quote-display::before {
+            content: '"';
+            position: absolute;
+            top: -15px;
+            left: 10px;
+            font-size: 3rem;
+            opacity: 0.15;
+            color: #FFD700;
+        }
+
+        .quote-display::after {
+            content: '"';
+            position: absolute;
+            bottom: -20px;
+            right: 10px;
+            font-size: 3rem;
+            opacity: 0.15;
+            color: #FFD700;
+        }
+
+        .quote-display::backdrop {
+            backdrop-filter: blur(5px);
+        }
+
+        .quote-text {
+            font-size: clamp(0.85rem, 2.5vw, 1.05rem);
+            line-height: 1.8;
+            font-weight: 500;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.3px;
+        }
+
+        .quote-lang {
+            font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+            margin-top: 12px;
+            opacity: 0.95;
+            font-style: normal;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #FFD700;
+        }
+
+        .page-indicator {
+            text-align: center;
+            color: #FFD700;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            font-weight: 700;
+            padding: clamp(15px, 3vw, 25px);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 105, 180, 0.1));
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        .page-indicator p {
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+            margin-top: 8px;
+            opacity: 0.85;
+            color: #FF69B4;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes confettiFallLeft {
+            to {
+                transform: translateY(100vh) translateX(-80px) rotate(-720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes confettiFallRight {
+            to {
+                transform: translateY(100vh) translateX(80px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes particleExplode {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0);
+            }
+        }
+
+        @keyframes balloonFloat {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh) translateX(120px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes balloonFloatAlt {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(80vh) translateX(0) rotate(0deg) scale(1);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh) translateX(-150px) rotate(-360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Unique Animation 1: Pop-up Zoom */
+        @keyframes popupZoom {
+            0% { 
+                opacity: 0; 
+                transform: scale(0) rotate(-180deg);
+                filter: brightness(0);
+            }
+            50% {
+                filter: brightness(1.5);
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1) rotate(0deg);
+                filter: brightness(1);
+            }
+        }
+
+        /* Unique Animation 2: Spiral Circle */
+        @keyframes spiralCircle {
+            0% {
+                opacity: 0;
+                transform: translate(0, -100px) rotate(0deg) scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(100px, 0) rotate(180deg) scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(0, 0) rotate(360deg) scale(1);
+            }
+        }
+
+        /* Unique Animation 3: Sparkle Fade */
+        @keyframes sparkleFade {
+            0% {
+                opacity: 0;
+                transform: scale(0) translate(-50px, -50px);
+                filter: blur(10px);
+            }
+            50% {
+                opacity: 1;
+                filter: blur(0px) drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translate(0, 0);
+                filter: blur(0px);
+            }
+        }
+
+        /* Unique Animation 4: Wave Slide */
+        @keyframes waveSlide {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%) skewY(-10deg);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.6));
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) skewY(0deg);
+            }
+        }
+
+        /* Unique Animation 5: Bounce Squeeze */
+        @keyframes bounceSqueeze {
+            0% { 
+                opacity: 0; 
+                transform: scaleY(0) translateY(50px);
+            }
+            50% {
+                transform: scaleY(1.2) translateY(-10px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: scaleY(1) translateY(0);
+            }
+        }
+
+        /* Unique Animation 6: Float Spin */
+        @keyframes floatSpin {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) rotateZ(-360deg) scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateZ(0deg) scale(1);
+            }
+        }
+
+        /* Unique Animation 7: Diamond Pulse */
+        @keyframes diamondPulse {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(45deg);
+                filter: brightness(2);
+            }
+            50% {
+                transform: scale(1.15) rotate(45deg);
+                filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+                filter: brightness(1);
+            }
+        }
+
+        /* Unique Animation 8: Flip Glide */
+        @keyframes flipGlide {
+            0% {
+                opacity: 0;
+                transform: perspective(1000px) rotateX(90deg) translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: perspective(1000px) rotateX(0deg) translateX(0);
+            }
+        }
+
+        /* Background Decoration */
+        .decoration {
+            position: fixed;
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+            animation: gentleFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(15deg); }
+        }
+
+        /* Top Left Decorations */
+        .deco-top-left-1 { top: 3%; left: 2%; animation-delay: 0s; }
+        .deco-top-left-2 { top: 8%; left: 5%; animation-delay: 0.8s; }
+        .deco-top-left-3 { top: 12%; left: 1%; animation-delay: 1.6s; }
+        .deco-top-left-4 { top: 6%; left: 8%; animation-delay: 2.4s; }
+        .deco-top-left-5 { top: 15%; left: 3%; animation-delay: 3.2s; }
+        .deco-top-left-6 { top: 18%; left: 7%; animation-delay: 4s; }
+        .deco-top-left-7 { top: 10%; left: 10%; animation-delay: 0.4s; }
+        .deco-top-left-8 { top: 4%; left: 6%; animation-delay: 1.2s; }
+        .deco-top-left-9 { top: 14%; left: 8%; animation-delay: 2s; }
+        .deco-top-left-10 { top: 9%; left: 2%; animation-delay: 2.8s; }
+
+        /* Top Right Decorations */
+        .deco-top-right-1 { top: 5%; right: 3%; animation-delay: 0.2s; }
+        .deco-top-right-2 { top: 10%; right: 6%; animation-delay: 1s; }
+        .deco-top-right-3 { top: 14%; right: 2%; animation-delay: 1.8s; }
+        .deco-top-right-4 { top: 7%; right: 9%; animation-delay: 2.6s; }
+        .deco-top-right-5 { top: 16%; right: 5%; animation-delay: 3.4s; }
+        .deco-top-right-6 { top: 19%; right: 8%; animation-delay: 4.2s; }
+        .deco-top-right-7 { top: 12%; right: 10%; animation-delay: 0.6s; }
+        .deco-top-right-8 { top: 6%; right: 7%; animation-delay: 1.4s; }
+        .deco-top-right-9 { top: 15%; right: 4%; animation-delay: 2.2s; }
+        .deco-top-right-10 { top: 11%; right: 1%; animation-delay: 3s; }
+
+        /* Middle Left Decorations */
+        .deco-mid-left-1 { top: 25%; left: 1%; animation-delay: 0.4s; }
+        .deco-mid-left-2 { top: 35%; left: 4%; animation-delay: 1.2s; }
+        .deco-mid-left-3 { top: 45%; left: 2%; animation-delay: 2s; }
+        .deco-mid-left-4 { top: 55%; left: 7%; animation-delay: 2.8s; }
+        .deco-mid-left-5 { top: 30%; left: 8%; animation-delay: 3.6s; }
+        .deco-mid-left-6 { top: 40%; left: 5%; animation-delay: 4.4s; }
+        .deco-mid-left-7 { top: 50%; left: 9%; animation-delay: 0.8s; }
+        .deco-mid-left-8 { top: 28%; left: 3%; animation-delay: 1.6s; }
+        .deco-mid-left-9 { top: 38%; left: 9%; animation-delay: 2.4s; }
+        .deco-mid-left-10 { top: 48%; left: 6%; animation-delay: 3.2s; }
+
+        /* Middle Right Decorations */
+        .deco-mid-right-1 { top: 26%; right: 2%; animation-delay: 0.6s; }
+        .deco-mid-right-2 { top: 36%; right: 5%; animation-delay: 1.4s; }
+        .deco-mid-right-3 { top: 46%; right: 3%; animation-delay: 2.2s; }
+        .deco-mid-right-4 { top: 56%; right: 8%; animation-delay: 3s; }
+        .deco-mid-right-5 { top: 32%; right: 9%; animation-delay: 3.8s; }
+        .deco-mid-right-6 { top: 42%; right: 6%; animation-delay: 4.6s; }
+        .deco-mid-right-7 { top: 52%; right: 10%; animation-delay: 1s; }
+        .deco-mid-right-8 { top: 29%; right: 4%; animation-delay: 1.8s; }
+        .deco-mid-right-9 { top: 39%; right: 10%; animation-delay: 2.6s; }
+        .deco-mid-right-10 { top: 49%; right: 7%; animation-delay: 3.4s; }
+
+        /* Bottom Left Decorations */
+        .deco-bottom-left-1 { bottom: 10%; left: 2%; animation-delay: 0.8s; }
+        .deco-bottom-left-2 { bottom: 15%; left: 6%; animation-delay: 1.6s; }
+        .deco-bottom-left-3 { bottom: 8%; left: 8%; animation-delay: 2.4s; }
+        .deco-bottom-left-4 { bottom: 18%; left: 4%; animation-delay: 3.2s; }
+        .deco-bottom-left-5 { bottom: 12%; left: 9%; animation-delay: 4s; }
+
+        /* Bottom Right Decorations */
+        .deco-bottom-right-1 { bottom: 11%; right: 3%; animation-delay: 1s; }
+        .deco-bottom-right-2 { bottom: 16%; right: 7%; animation-delay: 1.8s; }
+        .deco-bottom-right-3 { bottom: 9%; right: 9%; animation-delay: 2.6s; }
+        .deco-bottom-right-4 { bottom: 19%; right: 5%; animation-delay: 3.4s; }
+        .deco-bottom-right-5 { bottom: 13%; right: 10%; animation-delay: 4.2s; }
+
+
+        /* Unique Animation 1: Pop-up Zoom */
+        @keyframes popupZoom {
+            0% { 
+                opacity: 0; 
+                transform: scale(0) rotate(-180deg);
+                filter: brightness(0);
+            }
+            50% {
+                filter: brightness(1.5);
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1) rotate(0deg);
+                filter: brightness(1);
+            }
+        }
+
+        /* Unique Animation 2: Spiral Circle */
+        @keyframes spiralCircle {
+            0% {
+                opacity: 0;
+                transform: translate(0, -100px) rotate(0deg) scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(100px, 0) rotate(180deg) scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(0, 0) rotate(360deg) scale(1);
+            }
+        }
+
+        /* Unique Animation 3: Sparkle Fade */
+        @keyframes sparkleFade {
+            0% {
+                opacity: 0;
+                transform: scale(0) translate(-50px, -50px);
+                filter: blur(10px);
+            }
+            50% {
+                opacity: 1;
+                filter: blur(0px) drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translate(0, 0);
+                filter: blur(0px);
+            }
+        }
+
+        /* Unique Animation 4: Wave Slide */
+        @keyframes waveSlide {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%) skewY(-10deg);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.6));
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) skewY(0deg);
+            }
+        }
+
+        /* Unique Animation 5: Bounce Squeeze */
+        @keyframes bounceSqueeze {
+            0% { 
+                opacity: 0; 
+                transform: scaleY(0) translateY(50px);
+            }
+            50% {
+                transform: scaleY(1.2) translateY(-10px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: scaleY(1) translateY(0);
+            }
+        }
+
+        /* Unique Animation 6: Float Spin */
+        @keyframes floatSpin {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) rotateZ(-360deg) scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateZ(0deg) scale(1);
+            }
+        }
+
+        /* Unique Animation 7: Diamond Pulse */
+        @keyframes diamondPulse {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(45deg);
+                filter: brightness(2);
+            }
+            50% {
+                transform: scale(1.15) rotate(45deg);
+                filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+                filter: brightness(1);
+            }
+        }
+
+        /* Unique Animation 8: Flip Glide */
+        @keyframes flipGlide {
+            0% {
+                opacity: 0;
+                transform: perspective(1000px) rotateX(90deg) translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: perspective(1000px) rotateX(0deg) translateX(0);
+            }
+        }
+
+        /* Background Decoration */
+        .decoration {
+            position: fixed;
+            font-size: clamp(2rem, 8vw, 5rem);
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+            animation: gentleFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .deco-1 { top: 5%; left: 5%; animation-delay: 0s; }
+        .deco-2 { top: 10%; right: 8%; animation-delay: 1s; }
+        .deco-3 { bottom: 15%; left: 10%; animation-delay: 2s; }
+        .deco-4 { bottom: 10%; right: 5%; animation-delay: 1.5s; }
+        .deco-5 { top: 50%; left: 2%; animation-delay: 2.5s; }
+        .deco-6 { top: 60%; right: 3%; animation-delay: 0.5s; }
+
+        .footer {
+            text-align: center;
+            color: #FFD700;
+            padding: clamp(25px, 8vw, 40px) 20px;
+            font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-text {
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFD700, #FF69B4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .emoji-heart {
+            display: inline-block;
+            animation: heartBeat 0.6s ease-in-out infinite;
+            margin: 0 5px;
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
+        }
+
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.4);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-content {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-card:nth-child(1) {
+                animation: slideInDown 0.7s ease-out;
+            }
+
+            .photo-card:nth-child(2) {
+                animation: slideInUp 0.7s ease-out;
+            }
+
+            @keyframes slideInDown {
+                from { opacity: 0; transform: translateY(-40px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            @keyframes slideInUp {
+                from { opacity: 0; transform: translateY(40px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            .container {
+                padding: 12px;
+            }
+
+            .gallery-section {
+                padding: 20px;
+                border-radius: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 30px 15px 15px;
+            }
+
+            .gallery-section {
+                padding: 18px;
+                margin-bottom: 20px;
+            }
+
+            .gallery-content {
+                gap: 20px;
+                min-height: 400px;
+            }
+
+            .quote-text {
+                line-height: 1.6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Decorations - Fully Filled -->
+    <!-- Top Left Emojis -->
+    <div class="decoration deco-top-left-1">🎈</div>
+    <div class="decoration deco-top-left-2">🧸</div>
+    <div class="decoration deco-top-left-3">🎁</div>
+    <div class="decoration deco-top-left-4">🌸</div>
+    <div class="decoration deco-top-left-5">💝</div>
+    <div class="decoration deco-top-left-6">⭐</div>
+    <div class="decoration deco-top-left-7">🎈</div>
+    <div class="decoration deco-top-left-8">🧸</div>
+    <div class="decoration deco-top-left-9">🎁</div>
+    <div class="decoration deco-top-left-10">🌸</div>
+    
+    <!-- Top Right Emojis -->
+    <div class="decoration deco-top-right-1">💝</div>
+    <div class="decoration deco-top-right-2">⭐</div>
+    <div class="decoration deco-top-right-3">🎈</div>
+    <div class="decoration deco-top-right-4">🧸</div>
+    <div class="decoration deco-top-right-5">🎁</div>
+    <div class="decoration deco-top-right-6">🌸</div>
+    <div class="decoration deco-top-right-7">💝</div>
+    <div class="decoration deco-top-right-8">⭐</div>
+    <div class="decoration deco-top-right-9">🎈</div>
+    <div class="decoration deco-top-right-10">🧸</div>
+    
+    <!-- Middle Left Emojis -->
+    <div class="decoration deco-mid-left-1">🎁</div>
+    <div class="decoration deco-mid-left-2">🌸</div>
+    <div class="decoration deco-mid-left-3">💝</div>
+    <div class="decoration deco-mid-left-4">⭐</div>
+    <div class="decoration deco-mid-left-5">🎈</div>
+    <div class="decoration deco-mid-left-6">🧸</div>
+    <div class="decoration deco-mid-left-7">🎁</div>
+    <div class="decoration deco-mid-left-8">🌸</div>
+    <div class="decoration deco-mid-left-9">💝</div>
+    <div class="decoration deco-mid-left-10">⭐</div>
+    
+    <!-- Middle Right Emojis -->
+    <div class="decoration deco-mid-right-1">🎈</div>
+    <div class="decoration deco-mid-right-2">🧸</div>
+    <div class="decoration deco-mid-right-3">🎁</div>
+    <div class="decoration deco-mid-right-4">🌸</div>
+    <div class="decoration deco-mid-right-5">💝</div>
+    <div class="decoration deco-mid-right-6">⭐</div>
+    <div class="decoration deco-mid-right-7">🎈</div>
+    <div class="decoration deco-mid-right-8">🧸</div>
+    <div class="decoration deco-mid-right-9">🎁</div>
+    <div class="decoration deco-mid-right-10">🌸</div>
+    
+    <!-- Bottom Left Emojis -->
+    <div class="decoration deco-bottom-left-1">💝</div>
+    <div class="decoration deco-bottom-left-2">⭐</div>
+    <div class="decoration deco-bottom-left-3">🎈</div>
+    <div class="decoration deco-bottom-left-4">🧸</div>
+    <div class="decoration deco-bottom-left-5">🎁</div>
+    
+    <!-- Bottom Right Emojis -->
+    <div class="decoration deco-bottom-right-1">🌸</div>
+    <div class="decoration deco-bottom-right-2">💝</div>
+    <div class="decoration deco-bottom-right-3">⭐</div>
+    <div class="decoration deco-bottom-right-4">🎈</div>
+    <div class="decoration deco-bottom-right-5">🧸</div>
+
+    <header>
+        <h1 class="title">🎂 Happy Birthday Betu! 🎂</h1>
+        <p class="subtitle">💝 Your Day, Your Way, Your Glory 💝</p>
+    </header>
+
+    <div class="container">
+        <!-- Two Photo Gallery with Quotes -->
+        <div class="gallery-section">
+            <div class="gallery-content" id="galleryContent">
+                <!-- Dynamically populated -->
+            </div>
+            <div class="page-indicator" id="pageIndicator">
+                Page <span id="currentPage">1</span> of <span id="totalPages">10</span>
+                <p style="font-size: 0.9rem; margin-top: 5px; opacity: 0.8;">💡 Click anywhere to see next pair</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p class="footer-text">
+            Wishing you a day filled with love, laughter, and endless joy!
+            <span class="emoji-heart">💖</span>
+        </p>
+    </footer>
+
+    <script>
+        // Gallery functionality - 2 images per page
+        let currentPage = 0;
+        const totalPhotos = 20;
+        const photosPerPage = 2;
+        const totalPages = Math.ceil(totalPhotos / photosPerPage);
+
+        // Photo emojis
+        const photoEmojis = [
+        'images/image01.png',
+        'images/image02.png',
+        'images/image03.jpeg',
+        'images/image04.png',
+        'images/image05.png',
+        'images/image06.png',
+        'images/image07.png',
+        'images/image08.png',
+        'images/image09.png',
+        'images/image10.png',
+        'images/image11.png',
+        'images/image12.png',
+        'images/image13.png',
+        'images/image14.png',
+        'images/image15.png',
+        'images/image16.png',
+        'images/image17.png',
+        'images/image18.png',
+        'images/image19.png',
+        'images/image20.jpeg',
+        
+    //         "https://drive.google.com/uc?id=1rMDmaywQ3cjqadAhN8XXMtkrkDtBKDz_&export=view",
+    // "📷" 
+            // "https://drive.google.com/uc?id=1rMDmaywQ3cjqadAhN8XXMtkrkDtBKDz_&export=view"
+
+            // // 'https://drive.google.com/file/d/1rMDmaywQ3cjqadAhN8XXMtkrkDtBKDz_/view?usp=share_link'
+            // , '📷', '🎉', '😊', '✨', '🌟', '💖', '🎊', '🎁', '🌸', '🦋', '🌈', '💐', '🎀', '🌺', '💝', '🎈', '🌙', '⭐', '🎯'
+        ];
+
+        // Birthday wishes and shayari (20 quotes)
+        const quotes = [
+            { text: "जन्मदिन मुबारक! तेरी हंसी हमेशा बनी रहे और तुझे हर दिन खुशियां मिलें।"},
+            { text: "तू मेरी दुनिया की सबसे खास इंसान है। भगवान तुझे हमेशा खुश रखे।", lang: "हिंदी" },
+            { text: "जीवन में हर दिन खुशियों से भरा हो, हर ख्वाहिश पूरी हो, और हर राह आसान हो।", lang: "हिंदी" },
+            { text: "तेरा हर दिन गुलजार रहे, जन्मदिन की बधाई, जीवन खुशहाल रहे।", lang: "हिंदी" },
+            { text: "तू मेरी हर खुशी की वजह है, तेरी हंसी से मेरी दुनिया रोशन होती है।", lang: "हिंदी" },
+            { text: "सब से अलग है , सब से प्यारी है", lang: "हिंदी" },
+            { text: "आज का दिन बहुत खास है, तेरे लिए कुछ मेरे पास है।", lang: "हिंदी" },
+            { text: "चांद से प्यारी चांदनी, चांदनी से प्यारी रात, रात से प्यारी जिंदगी, और जिंदगी से भी प्यारी मेरी भांजी", lang: "हिंदी" },
+            { text: "बार-बार ये दिन आये, बार-बार ये दिल गाये, तू जियो हजारों साल।", lang: "हिंदी" },
+            { text: "ख्वाहिशों के समंदर के सब मोती तेरे नसीब हों।", lang: "हिंदी" },
+            { text: "तेरे चाहने वाले हमसफर तेरे हरदम करीब हों।", lang: "हिंदी" },
+            { text: "मेरी प्यारी भांजी, तेरी मुस्कान से ही मेरा घर रोशन होता है।", lang: "हिंदी" },
+            { text: "बचपन की यादें, हंसी-ठिठोली और ढेर सारा प्यार।", lang: "हिंदी" },
+            { text: "तू सिर्फ मेरी भांजी ही नहीं, मेरी सबसे अच्छी दोस्त भी है।", lang: "हिंदी" },
+            { text: "मेरी शान है, उसके बिना मेरी पहचान अधूरी है।", lang: "हिंदी" },
+            { text: "तेरे बिना मेरा हर दिन अधूरा है, तू मेरी जिंदगी की सबसे खास इंसान है।", lang: "हिंदी" },
+            { text: "Wishing you a year filled with dreams that come true and moments that last forever.", lang: "English" },
+            { text: "Your smile is the light that brightens everyone's day. Happy Birthday!", lang: "English" },
+            { text: "May your birthday bring as much joy as you bring to everyone around you.", lang: "English" },
+            { text: "Here's to another year of love, laughter, and endless possibilities!", lang: "English" }
+        ];
+
+        // Track click count for unique animations
+        let clickCount = 0;
+        const animationSequence = [
+            'popupZoom',
+            'spiralCircle',
+            'sparkleFade',
+            'waveSlide',
+            'bounceSqueeze',
+            'floatSpin',
+            'diamondPulse',
+            'flipGlide'
+        ];
+
+        function renderGalleryPage() {
+            const galleryContent = document.getElementById('galleryContent');
+            galleryContent.innerHTML = '';
+
+            const startIdx = currentPage * photosPerPage;
+            const endIdx = Math.min(startIdx + photosPerPage, totalPhotos);
+
+            for (let i = startIdx; i < endIdx; i++) {
+                const photoCard = document.createElement('div');
+                photoCard.className = 'photo-card';
+                const animationName = animationSequence[currentPage % animationSequence.length];
+                photoCard.style.animation = `${animationName} 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`;
+                photoCard.innerHTML = `
+                    <div class="photo-display" style="background-image: url('${photoEmojis[i]}'); background-size: cover; background-position: center;"></div>
+                    <div class="photo-number">Photo ${i + 1}</div>
+                    <div class="quote-display">
+                        <div class="quote-text">${quotes[i].text}</div>
+                        
+                    </div>
+                `;
+                galleryContent.appendChild(photoCard);
+            }
+
+            // Update page indicator
+            document.getElementById('currentPage').textContent = currentPage + 1;
+            document.getElementById('totalPages').textContent = totalPages;
+        }
+
+        function nextPage() {
+            currentPage = (currentPage + 1) % totalPages;
+            renderGalleryPage();
+            clickCount++;
+            triggerPageSpecificAnimation();
+        }
+
+        // Unique animation triggers based on page
+        function triggerPageSpecificAnimation() {
+            const pageNum = currentPage % animationSequence.length;
+            
+            switch(pageNum) {
+                case 0: createPopupEffect(); break;
+                case 1: createSpiralEffect(); break;
+                case 2: createSparkleEffect(); break;
+                case 3: createWaveEffect(); break;
+                case 4: createBounceEffect(); break;
+                case 5: createFloatSpinEffect(); break;
+                case 6: createDiamondEffect(); break;
+                case 7: createFlipEffect(); break;
+            }
+        }
+
+        // Animation 1: Popup Zoom with particles
+        function createPopupEffect() {
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = window.innerWidth / 2 + 'px';
+                    particle.style.top = window.innerHeight / 2 + 'px';
+                    const colors = ['#FFD700', '#FF1493', '#FF69B4'];
+                    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    document.body.appendChild(particle);
+                    const angle = (i / 25) * Math.PI * 2;
+                    const tx = Math.cos(angle) * 150;
+                    const ty = Math.sin(angle) * 150;
+                    particle.style.setProperty('--tx', tx + 'px');
+                    particle.style.setProperty('--ty', ty + 'px');
+                    particle.style.animation = 'particleExplode 1s ease-out forwards';
+                    setTimeout(() => particle.remove(), 1000);
+                }, i * 30);
+            }
+        }
+
+        // Animation 2: Spiral rotating elements
+        function createSpiralEffect() {
+            for (let i = 0; i < 12; i++) {
+                const emoji = document.createElement('div');
+                emoji.style.position = 'fixed';
+                emoji.style.fontSize = '2rem';
+                emoji.style.left = window.innerWidth / 2 + 'px';
+                emoji.style.top = window.innerHeight / 2 + 'px';
+                emoji.textContent = ['🎈', '🎁', '💝', '⭐'][i % 4];
+                emoji.style.pointerEvents = 'none';
+                emoji.style.zIndex = '1';
+                document.body.appendChild(emoji);
+                
+                const angle = (i / 12) * Math.PI * 2;
+                const radius = 100 + Math.random() * 50;
+                const duration = 0.8;
+                emoji.animate([
+                    { transform: 'translate(-50%, -50%) scale(0) rotate(0deg)', opacity: 0 },
+                    { transform: `translate(calc(-50% + ${Math.cos(angle) * radius}px), calc(-50% + ${Math.sin(angle) * radius}px)) scale(1) rotate(360deg)`, opacity: 1 }
+                ], { duration: duration * 1000, easing: 'ease-out' });
+                
+                setTimeout(() => emoji.remove(), duration * 1000 + 100);
+            }
+        }
+
+        // Animation 3: Sparkle effect with golden lights
+        function createSparkleEffect() {
+            for (let i = 0; i < 35; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'particle';
+                sparkle.style.left = window.innerWidth / 2 + 'px';
+                sparkle.style.top = window.innerHeight / 2 + 'px';
+                sparkle.style.background = '#FFD700';
+                sparkle.style.boxShadow = '0 0 10px #FFD700';
+                sparkle.style.width = '6px';
+                sparkle.style.height = '6px';
+                document.body.appendChild(sparkle);
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 50 + Math.random() * 200;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                sparkle.style.setProperty('--tx', tx + 'px');
+                sparkle.style.setProperty('--ty', ty + 'px');
+                sparkle.style.animation = `particleExplode ${0.6 + Math.random() * 0.4}s ease-out forwards`;
+                
+                setTimeout(() => sparkle.remove(), 1000);
+            }
+        }
+
+        // Animation 4: Wave sliding effect
+        function createWaveEffect() {
+            for (let i = 0; i < 8; i++) {
+                const wave = document.createElement('div');
+                wave.style.position = 'fixed';
+                wave.style.fontSize = '3rem';
+                wave.style.left = (i * (window.innerWidth / 8)) + 'px';
+                wave.style.top = '50%';
+                wave.style.transform = 'translateY(-50%)';
+                wave.textContent = '🎊';
+                wave.style.pointerEvents = 'none';
+                wave.style.zIndex = '1';
+                document.body.appendChild(wave);
+                
+                wave.animate([
+                    { opacity: 0, transform: 'translateY(-50%) translateX(-200px) rotateZ(-45deg)', filter: 'blur(10px)' },
+                    { opacity: 1, transform: 'translateY(-50%) translateX(0) rotateZ(0deg)', filter: 'blur(0px)' }
+                ], { duration: 0.6 * 1000, delay: i * 50, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)' });
+                
+                setTimeout(() => wave.remove(), 0.6 * 1000 + i * 50 + 100);
+            }
+        }
+
+        // Animation 5: Bounce squeeze effect
+        function createBounceEffect() {
+            for (let i = 0; i < 15; i++) {
+                const bounce = document.createElement('div');
+                bounce.style.position = 'fixed';
+                bounce.style.fontSize = '1.5rem';
+                bounce.style.left = window.innerWidth / 2 + (Math.random() * 200 - 100) + 'px';
+                bounce.style.top = '80%';
+                bounce.style.pointerEvents = 'none';
+                bounce.style.zIndex = '1';
+                bounce.textContent = '✨';
+                document.body.appendChild(bounce);
+                
+                bounce.animate([
+                    { transform: 'translateY(0) scaleY(0.3)', opacity: 0 },
+                    { transform: 'translateY(-60px) scaleY(1.1)', offset: 0.5 },
+                    { transform: 'translateY(0) scaleY(1)', opacity: 1 }
+                ], { duration: 0.7 * 1000, delay: i * 40, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)' });
+                
+                setTimeout(() => bounce.remove(), 0.7 * 1000 + i * 40 + 100);
+            }
+        }
+
+        // Animation 6: Float and spin effect
+        function createFloatSpinEffect() {
+            for (let i = 0; i < 10; i++) {
+                const floater = document.createElement('div');
+                floater.style.position = 'fixed';
+                floater.style.fontSize = '2.5rem';
+                floater.style.left = Math.random() * window.innerWidth + 'px';
+                floater.style.top = window.innerHeight + 'px';
+                floater.textContent = ['🧸', '🎀', '💖', '🌸'][Math.floor(Math.random() * 4)];
+                floater.style.pointerEvents = 'none';
+                floater.style.zIndex = '1';
+                document.body.appendChild(floater);
+                
+                const duration = 1.2 + Math.random() * 0.4;
+                floater.animate([
+                    { transform: 'translateY(0) rotateZ(-360deg) scale(0.5)', opacity: 0 },
+                    { transform: 'translateY(-80vh) rotateZ(0deg) scale(1)', opacity: 1 }
+                ], { duration: duration * 1000, easing: 'ease-out' });
+                
+                setTimeout(() => floater.remove(), duration * 1000 + 100);
+            }
+        }
+
+        // Animation 7: Diamond pulse effect
+        function createDiamondEffect() {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            for (let i = 0; i < 30; i++) {
+                const diamond = document.createElement('div');
+                diamond.className = 'particle';
+                diamond.style.left = centerX + 'px';
+                diamond.style.top = centerY + 'px';
+                diamond.style.background = '#FFD700';
+                diamond.style.boxShadow = '0 0 15px #FFD700';
+                document.body.appendChild(diamond);
+                
+                const angle = (i / 30) * Math.PI * 2;
+                const radius = 80 + Math.random() * 100;
+                const tx = Math.cos(angle) * radius;
+                const ty = Math.sin(angle) * radius;
+                
+                diamond.style.setProperty('--tx', tx + 'px');
+                diamond.style.setProperty('--ty', ty + 'px');
+                diamond.style.animation = `particleExplode ${0.7 + Math.random() * 0.3}s ease-out forwards`;
+                
+                setTimeout(() => diamond.remove(), 1000);
+            }
+        }
+
+        // Animation 8: Flip and glide effect
+        function createFlipEffect() {
+            const icons = ['🎂', '🎉', '🎊', '🎁', '💝', '🌹', '✨', '🌟'];
+            for (let i = 0; i < icons.length; i++) {
+                const flipper = document.createElement('div');
+                flipper.style.position = 'fixed';
+                flipper.style.fontSize = '2.5rem';
+                flipper.style.left = (i * (window.innerWidth / icons.length)) + 'px';
+                flipper.style.top = window.innerHeight / 2 + 'px';
+                flipper.style.transform = 'translateY(-50%)';
+                flipper.textContent = icons[i];
+                flipper.style.pointerEvents = 'none';
+                flipper.style.zIndex = '1';
+                document.body.appendChild(flipper);
+                
+                flipper.animate([
+                    { transform: 'translateY(-50%) perspective(1000px) rotateX(90deg) scaleX(0)', opacity: 0 },
+                    { transform: 'translateY(-50%) perspective(1000px) rotateX(0deg) scaleX(1)', opacity: 1 }
+                ], { duration: 0.7 * 1000, delay: i * 80, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)' });
+                
+                setTimeout(() => flipper.remove(), 0.7 * 1000 + i * 80 + 100);
+            }
+        }
+
+        // Click anywhere to advance
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.emoji-heart')) {
+                nextPage();
+            }
+        });
+
+        // Initial render
+        renderGalleryPage();
+        createFloatSpinEffect();
+    </script>
+</body>
+</html>
